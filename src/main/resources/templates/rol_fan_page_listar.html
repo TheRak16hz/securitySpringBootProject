@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <link rel="stylesheet" th:href="@{/css/4.2-rol_listar.css}" />
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
     <title>Rol Fan Page</title>
   </head>
   <body>
@@ -54,19 +54,19 @@
         <div class="rejilla-botones">
           <button
             class="boton-accion"
-            onclick="window.location.href='4.1-rol_agregar.html'"
+            th:onclick="|window.location.href='@{/rol_fan_page_agregar}'|"
           >
-            Agregar
+            Agregar (WIP)
           </button>
           <button
             class="boton-accion"
-            onclick="window.location.href='4-rol.html'"
+            th:onclick="|window.location.href='@{/rol_fan_page}'|"
           >
-            Rol
+            Rol Fan Page
           </button>
           <button
             class="boton-accion"
-            onclick="window.location.href='2-seguridad.html'"
+            th:onclick="|window.location.href='@{/seguridad}'|"
           >
             Menú Principal
           </button>

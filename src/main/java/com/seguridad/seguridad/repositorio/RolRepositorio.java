@@ -16,7 +16,7 @@ public interface RolRepositorio extends JpaRepository<Rol, Integer>{
  @Query(value = "SELECT * FROM seguridad.rol_listar()", nativeQuery = true)
  List<Rol> rol_listar();
 
- //Metodo para invocae wl procedimiento almacenado (mas seguro)
+ //Metodo para invoca el procedimiento almacenado (mas seguro)
  //falto aqui
 
  @Transactional
