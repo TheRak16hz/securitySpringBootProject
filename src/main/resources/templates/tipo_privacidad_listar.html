@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
     <title>Listar Tipo Privacidad</title>
 </head>
 <body>
@@ -20,14 +20,14 @@
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Nombre Tipo</th>
+                            <th>Nombre</th>
                             <th>Estatus</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${#lists.isEmpty(tiposPrivacidad)}">
-                            <td colspan="4" class="text-center">No hay tipos de privacidad registrados.</td>
+                            <td colspan="4" class="text-center">No hay tipos de privacidad registrados actualmente.</td>
                         </tr>
 
                         <tr th:each="tipo : ${tiposPrivacidad}">
@@ -36,8 +36,8 @@
                             <td class="text-center" th:text="${tipo.est_tip}"></td>
                             
                             <td class="text-center acciones-tabla">
-                                <a th:href="@{/tipo_privacidad_editar}" class="boton-accion-tabla" title="Editar">✎</a>
-                                <a href="#" class="boton-accion-tabla" title="Eliminar">🗑️</a>
+                                <a th:href="@{/tipo_privacidad_editar(cod_tip=${tipo.getCod_tip()})}" class="boton-accion-tabla" title="Editar">✎</a>
+                                <a th:href="@{/tipo_privacidad_eliminar(cod_tip=${tipo.getCod_tip()})}" class="boton-accion-tabla btn-eliminar-confirmar" th:data-id="${tipo.getCod_tip()}" th:data-nombre="${tipo.getNom_tip()}" title="Eliminar">🗑️</a>
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +56,7 @@
                     class="boton-accion"
                     th:onclick="|window.location.href='@{/tipo_privacidad}'|"
                 >
-                    Menú Tipo Privacidad
+                    Tipo Privacidad
                 </button>
                 
                 <button
@@ -68,7 +68,60 @@
             </div>
         </div>
     </div>
-    
-    <script th:src="@{/JAVASCRIPT/roles.js}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. MOSTRAR ALERTAS DE ÉXITO O ERROR (Vienen del Controlador)
+            /*[# th:if="${exito}"]*/
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Hecho!',
+                    text: [[${exito}]],
+                    confirmButtonColor: 'rgba(172, 11, 236, 1)',
+                    timer: 3000
+                });
+            /*[/]*/
+
+            /*[# th:if="${error}"]*/
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lo siento',
+                    text: [[${error}]],
+                    confirmButtonColor: 'rgba(172, 11, 236, 1)'
+                });
+            /*[/]*/
+
+
+            // 2. LÓGICA DE CONFIRMACIÓN PARA ELIMINAR
+            const botonesEliminar = document.querySelectorAll('.btn-eliminar-confirmar');
+
+            botonesEliminar.forEach(boton => {
+                boton.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita que se elimine directamente
+                    
+                    const urlDestino = this.getAttribute('href'); 
+                    const codTip = this.getAttribute('data-id');
+                    const nomTip = this.getAttribute('data-nombre');
+
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: `Vas a eliminar el tipo de privacidad: ${nomTip} (Código: ${codTip})`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: 'rgba(172, 11, 236, 1)',
+                        cancelButtonColor: '#f122d2ff',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed){                          
+                            window.location.href = urlDestino;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

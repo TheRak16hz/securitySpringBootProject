@@ -13,12 +13,12 @@ public class RolServicio {
     private RolRepositorio rolRepositorio;
 
     public List<Rol> listarRoles() {
-        return rolRepositorio.findAll();
+        return rolRepositorio.rol_listar();
     }
 
-    // Metodo para agregar un rol
+    //metodo para agregar un rol
     public void agregarRol(Rol rol){
-        // Corregido el nombre de la variable (antes rolRespositorio)
+        //Usando getters para obtener los valores
         rolRepositorio.rol_agregar(
             rol.getNom_rol(),
             rol.getDes_rol(),
@@ -26,8 +26,9 @@ public class RolServicio {
         );
     }
 
-    public void modificarRol(Rol rol) {
-        // Se eliminó la coma sobrante después del último parámetro
+    //metodo para modificar un rol
+    public void  modificarRol(Rol rol){
+        //Usando getters para obtener los valores
         rolRepositorio.rol_modificar(
             rol.getCod_rol(),
             rol.getNom_rol(),
@@ -36,19 +37,19 @@ public class RolServicio {
         );
     }
 
-    // Metodo para buscar un rol por su id
-    public Rol buscarPorId(int cod_rol) {
-        return rolRepositorio.findById(cod_rol).orElse(null);
+    //Metodo para buscar un rol por su id
+    public Rol buscarPorId(int cod_rol){
+        //Obtener el rol desde el repositorio
+        return rolRepositorio.rol_buscar(cod_rol);
     }
 
-    // Se cambió el tipo de retorno a boolean para que coincida con return true/false
-    public boolean eliminarRol(int cod_rol) {
-        // Corregida la sintaxis de orElse(null)
+    //Metodo para eliminar un rol
+    public boolean eliminarRol(int cod_rol){
         Rol rol = rolRepositorio.findById(cod_rol).orElse(null);
-        if (rol != null) {
+        if(rol !=null){
             rolRepositorio.rol_eliminar(cod_rol);
             return true;
         }
-        return false;
+    return false;
     }
 }

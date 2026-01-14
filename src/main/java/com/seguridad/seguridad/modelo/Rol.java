@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "Rol", schema = "seguridad")
 public class Rol {
 
-    // NOTA: Tu variable se llama 'cod_rol', no 'cod_rol'
+    // NOTA: Tu variable se llama 'cod_id', no 'cod_rol'
     @Id
     @Column(name = "cod_rol")
     private int cod_rol;
@@ -36,7 +36,7 @@ public class Rol {
 
     // --- ¡AQUÍ ESTÁBAN LOS FALTANTES! GETTERS Y SETTERS ---
     
-    // Para cod_rol
+    // Para cod_id
     public int getCod_rol() {
         return cod_rol;
     }
