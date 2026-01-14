@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Listar Tipo Privacidad</title>
+</head>
+<body>
+    <div class="contenedor-tarjeta">
+        <div class="cabecera-logo">
+            <img th:src="@{/imagenes/logo.jpeg}" alt="Logo de la aplicación" class="logo-imagen" />
+        </div>
+
+        <div class="contenido-principal">
+            <div class="titulo-solicitud">Datos Tipo Privacidad</div>
+
+            <div class="contenedor-tabla">
+                <table class="tabla-centrada">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre Tipo</th>
+                            <th>Estatus</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(tiposPrivacidad)}">
+                            <td colspan="4" class="text-center">No hay tipos de privacidad registrados.</td>
+                        </tr>
+
+                        <tr th:each="tipo : ${tiposPrivacidad}">
+                            <td class="text-center" th:text="${tipo.cod_tip}"></td>
+                            <td class="text-center" th:text="${tipo.nom_tip}"></td>
+                            <td class="text-center" th:text="${tipo.est_tip}"></td>
+                            
+                            <td class="text-center acciones-tabla">
+                                <a th:href="@{/tipo_privacidad_editar}" class="boton-accion-tabla" title="Editar">✎</a>
+                                <a href="#" class="boton-accion-tabla" title="Eliminar">🗑️</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rejilla-botones">
+                <button
+                    class="boton-accion"
+                    th:onclick="|window.location.href='@{/tipo_privacidad_agregar}'|"
+                >
+                    Agregar
+                </button>
+                
+                <button
+                    class="boton-accion"
+                    th:onclick="|window.location.href='@{/tipo_privacidad}'|"
+                >
+                    Menú Tipo Privacidad
+                </button>
+                
+                <button
+                    class="boton-accion"
+                    th:onclick="|window.location.href='@{/seguridad}'|"
+                >
+                    Menú Principal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script th:src="@{/JAVASCRIPT/roles.js}"></script>
+</body>
+</html>

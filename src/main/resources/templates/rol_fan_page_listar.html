@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/4.2-rol_listar.css}" />
+    <title>Rol Fan Page</title>
+  </head>
+  <body>
+    <div class="contenedor-tarjeta">
+      <div class="cabecera-logo">
+        <img th:src="@{/imagenes/logo.jpeg}" alt="Logo de la red social" class="logo-imagen" />
+      </div>
+
+      <div class="contenido-principal">
+        <div class="titulo-solicitud">Rol de Fan Page</div>
+
+        <div class="contenedor-tabla">
+          <table class="tabla-centrada">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fan Page</th>
+                <th>Rol</th>
+                <th>Estatus</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr th:if="${#lists.isEmpty(rolfanpages)}">
+                <td colspan="6" class="text-center">No hay roles registrados.</td>
+              </tr>
+
+              <tr th:each="rol_fan_page : ${rolfanpages}">
+                <td class="text-center" th:text="${rol_fan_page.getCod_rol_fan()}"></td>
+                <td class="text-center" th:text="${rol_fan_page.persona.nm1_per}"></td>
+                <td class="text-center" th:text="${rol_fan_page.persona.ap1_per}"></td>
+                <td class="text-center" th:text="${rol_fan_page.fan_page.nom_fan_pag}"></td>
+                <td class="text-center" th:text="${rol_fan_page.rol.nom_rol}"></td>
+                <td class="text-center" th:text="${rol_fan_page.getEst_rol_fan()}"></td>
+                <td class="text-center acciones-tabla"> <a href="4.1-rol_agregar.html" class="boton-accion-tabla" title="Editar">✎</a>
+                  <a href="#" class="boton-accion-tabla" title="Eliminar">🗑</a>
+                </td>
+              </tr>
+                
+            </tbody>
+          </table>
+        </div>
+
+        <div class="rejilla-botones">
+          <button
+            class="boton-accion"
+            onclick="window.location.href='4.1-rol_agregar.html'"
+          >
+            Agregar
+          </button>
+          <button
+            class="boton-accion"
+            onclick="window.location.href='4-rol.html'"
+          >
+            Rol
+          </button>
+          <button
+            class="boton-accion"
+            onclick="window.location.href='2-seguridad.html'"
+          >
+            Menú Principal
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="../JAVASCRIPT/roles.js"></script>
+  </body>
+</html>

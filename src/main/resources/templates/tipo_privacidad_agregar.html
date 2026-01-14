@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Agregar Tipo de Privacidad</title>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="tarjeta-contenedor">
+        <div class="cabecera-logo">
+            <img th:src="@{/imagenes/logo.jpeg}" alt="Logo" class="img-fluid w-25">
+            <h1 class="text-lg font-bold">Registro de Privacidad</h1>
+        </div>
+
+        <div class="contenido-principal">
+            <h2 class="titulo-seccion">Agregar Nuevo Tipo de Privacidad</h2>
+
+            <form th:action="@{/tipo_privacidad_agregar}" th:object="${tipoPrivacidad}" class="formulario" method="post">
+                <div class="rejilla-formulario">
+                    
+                    <div class="campo">
+                        <label for="nom_privacidad" class="etiqueta">Nombre de Privacidad</label>
+                        <input type="text" 
+                               id="nom_privacidad" 
+                               th:field="*{nom_privacidad}" 
+                               class="entrada" 
+                               placeholder="Ej: Público, Solo amigos..."
+                               required />
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="des_privacidad" class="etiqueta">Descripción</label>
+                        <textarea id="des_privacidad" 
+                                  th:field="*{des_privacidad}" 
+                                  class="entrada" 
+                                  maxlength="100"
+                                  placeholder="Define el alcance de este tipo..."></textarea>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="est_privacidad" class="etiqueta">Estatus</label>
+                        <select id="est_privacidad" th:field="*{est_privacidad}" class="entrada" required>
+                            <option value="">Seleccione...</option>
+                            <option value="A">Activo</option>
+                            <option value="I">Inactivo</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-botones">
+                    <button type="submit" class="boton-accion">Guardar Privacidad</button>
+                    <a th:href="@{/tipo_privacidad_listar}" class="boton-secundario" 
+                       style="display: inline-block; text-align: center; text-decoration: none; padding: 0.5rem 1rem;">
+                       Volver
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/validaciones.js}"></script>
+</body>
+</html>

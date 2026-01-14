@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/4.2-rol_listar.css}" />
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+    <title>Listar Rol</title>
+</head>
+<body>
+    <div class="contenedor-tarjeta">
+        <div class="cabecera-logo">
+            <img th:src="@{/imagenes/logo.jpeg}" alt="Logo de la aplicación" class="logo-imagen" />
+        </div>
+
+        <div class="contenido-principal">
+            <div class="titulo-solicitud">Roles</div>
+
+            <div class="contenedor-tabla">
+                <table class="tabla-centrada">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre Del Rol</th>
+                            <th>Descripción del Rol</th>
+                            <th>Estatus</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(rols)}">
+                            <td colspan="5" class="text-center">No hay roles registrados actualmente.</td>
+                        </tr>
+
+                        <tr th:each="rol : ${rols}">
+                            <td class="text-center" th:text="${rol.getCod_rol()}"></td>
+                            <td class="text-center" th:text="${rol.getNom_rol()}"></td>
+                            <td class="text-center" th:text="${rol.getDes_rol()}"></td>
+                            <td class="text-center" th:text="${rol.getEst_rol()}"></td>
+                            <td class="text-center acciones-tabla">
+                                <a th:href="@{/rol_editar(cod_rol=${rol.getCod_rol()})}" class="boton-accion-tabla" title="Editar">✎</a>
+                                <a th:href="@{/rol_eliminar(cod_rol=${rol.getCod_rol()})}" 
+                                class="boton-accion-tabla btn-eliminar-confirmar" 
+                                th:data-id="${rol.getCod_rol()}" 
+                                th:data-nombre="${rol.getCod_rol()}" 
+                                title="Eliminar">🗑️</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rejilla-botones">
+                <button class="boton-accion" th:onclick="|window.location.href='@{/rol_agregar}'|">Agregar</button>
+                <button class="boton-accion" th:onclick="|window.location.href='@{/rol}'|">Rol</button>
+                <button class="boton-accion" th:onclick="|window.location.href='@{/seguridad}'|">Menú Principal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"crossorigin="anonymous"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script th:inline="javascript">
+        // Thymeleaf buscará los atributos 'exito' o 'error' que definiste en el Controller
+        var mensajeExito = [[${exito}]];
+        var mensajeError = [[${error}]];
+
+        if (mensajeExito) {
+            Swal.fire({
+                title: "¡Logrado!",
+                text: mensajeExito, // Esto mostrará el texto que viene de tu Controller
+                icon: "success",
+                confirmButtonColor: "#3085d6"
+            });
+        } else if (mensajeError) {
+            Swal.fire({
+                title: "Error",
+                text: mensajeError,
+                icon: "error",
+                confirmButtonColor: "#d33"
+            });
+        }
+    </script>
+</body>
+</html>

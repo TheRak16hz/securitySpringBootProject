@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/CSS/4.2-rol_listar.css}" />
+    <title>Listar Usuarios</title>
+  </head>
+  <body>
+    <div class="contenedor-tarjeta">
+      <div class="cabecera-logo">
+        <img
+          th:src="@{/imagenes/logo.jpeg}"
+          alt="Logo de la aplicación"
+          class="logo-imagen"
+        />
+      </div>
+
+      <div class="contenido-principal">
+        <div class="titulo-solicitud">Datos Usuarios</div>
+
+        <div class="contenedor-tabla">
+          <table class="tabla-centrada">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Alias / Usuario</th>
+                <th>Email</th>
+                <th>Estatus</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(usuarios)}">
+                <td colspan="5" class="text-center">
+                  No hay usuarios registrados actualmente.
+                </td>
+              </tr>
+
+              <tr th:each="usuario : ${usuarios}">
+                <td class="text-center" th:text="${usuario.cod_usu}"></td>
+                <td class="text-center" th:text="${usuario.ali_usu}"></td>
+                <td class="text-center" th:text="${usuario.ema_usu}"></td>
+                <td class="text-center" th:text="${usuario.est_usu}"></td>
+
+                <td class="text-center acciones-tabla">
+                  <a
+                    th:href="@{/usuario_agregar}"
+                    class="boton-accion-tabla"
+                    title="Editar"
+                    >✎</a
+                  >
+                  <a href="#" class="boton-accion-tabla" title="Eliminar">🗑️</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="rejilla-botones">
+          <button
+            class="boton-accion"
+            th:onclick="|window.location.href='@{/usuario_agregar}'|"
+          >
+            Agregar
+          </button>
+
+          <button
+            class="boton-accion"
+            th:onclick="|window.location.href='@{/usuario}'|"
+          >
+            Usuario
+          </button>
+
+          <button
+            class="boton-accion"
+            th:onclick="|window.location.href='@{/seguridad}'|"
+          >
+            Menú Principal
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script th:src="@{/JAVASCRIPT/roles.js}"></script>
+  </body>
+</html>
