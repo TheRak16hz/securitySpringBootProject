@@ -24,18 +24,16 @@ public class Rol_Fan_Page {
     @ManyToOne
     @JoinColumn(name = "fky_fan_pag", referencedColumnName = "cod_fan_pag")
     private Fan_Page fan_page;
-    
 
     @ManyToOne
     @JoinColumn(name = "fky_rol", referencedColumnName = "cod_rol")
     private Rol rol;
-    
-   
+
     @Column(name = "est_rol_fan")
     private String est_rol_fan;
 
     //Constructor Vacio
-    public Rol_Fan_Page() { 
+    public Rol_Fan_Page() {
     }
 
     //Constructor Completo
@@ -45,11 +43,11 @@ public class Rol_Fan_Page {
         this.fan_page = fan_page;
         this.rol = rol;
         this.est_rol_fan = est_rol_fan;
-    }       
+    }
     // Getters and Setters
-    public int getCod_rol_fan() {   
+    public int getCod_rol_fan() {
         return cod_rol_fan;
-    }   
+    }
     public void setCod_rol_fan(int cod_rol_fan) {
         this.cod_rol_fan = cod_rol_fan;
     }
@@ -58,19 +56,19 @@ public class Rol_Fan_Page {
     }
     public void setPersona(persona persona) {
         this.persona = persona;
-    }   
+    }
     public Fan_Page getFan_page() {
         return fan_page;
-    }   
+    }
     public void setFan_page(Fan_Page fan_page) {
         this.fan_page = fan_page;
-    }   
+    }
     public Rol getRol() {
         return rol;
     }
     public void setRol(Rol rol) {
         this.rol = rol;
-    }   
+    }
     public String getEst_rol_fan() {
         return est_rol_fan;
     }
